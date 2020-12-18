@@ -1,15 +1,23 @@
 import React, { Component, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View, Button, Image, TextInput } from 'react-native';
 import Feed from './Feed'
 
+const Tab = createBottomTabNavigator();
 
+export default function Login({ login, navigation }) {
 
-export default function Login({ navigation }) {
-
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
+    const handleSubmit = (event) => {
+        let user = {
+            username,
+            password
+        }
+    }
 
     return (
         <View style={styles.container} >
@@ -21,8 +29,8 @@ export default function Login({ navigation }) {
             <Text>Username</Text>
             <TextInput
                 style={styles.input}
-                onChangeText={setEmail}
-                value={email}
+                onChangeText={setUsername}
+                value={username}
             />
             <Text>Password</Text>
             <TextInput
@@ -33,7 +41,7 @@ export default function Login({ navigation }) {
             />
             <Button
                 title="Login"
-                onPress={() => navigation.navigate('Feed')}
+                onPress={() => navigation.navigate('Feed'), handleSubmit}
             />
         </View>
     )
